@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -10,7 +11,19 @@ async function bootstrap() {
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
       credentials: true, // Permitir cookies ou autenticação baseada em credenciais
     });
-    
+
+    const config = new DocumentBuilder()
+    .setTitle('Documentação com Swagger - Teste Teddy')
+    .setDescription(
+      'Documentação da aplicação de teste.',
+    )
+    .setVersion('1.0')
+    .addTag('users')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
