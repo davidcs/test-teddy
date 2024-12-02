@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { Body, Controller, Delete, Get, Param, Patch, Post, Res } from '@nestjs/common';
 import { UsersDto } from './users.dto';
 
-@Controller('users')
+@Controller('api/users')
 export class UsersController {
     constructor(
         private readonly usersService: UsersService
